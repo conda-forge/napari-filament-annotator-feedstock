@@ -6,18 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-filament-annotator-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-filament-annotator-{{ version }}.tar.gz
   sha256: b8d271c96f1cd5299dff09d2c264b7fc9d5300a569202e0cad3930e41502ef32
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - geometry3d
     - imageio !=2.22.1
@@ -26,7 +26,7 @@ requirements:
     - networkx
     - numpy
     - pandas
-    - python >=3.8
+    - python >={{ python_min }}
     - qtpy
     - scikit-image
     - scikit-learn
@@ -40,6 +40,7 @@ test:
     # - pip check  # Fails due to sklearn 
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/amedyukhina/napari-filament-annotator
